@@ -20,7 +20,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoTemperatura").innerHTML = "";
     mostradorTemperatura = new JustGage({
         id: "graficoTemperatura",
-        value: valorSeguro(data.temperatura),
+        value: valorSeguro(data.temperatura.media),  // Acessando a média dos dados
         min: 0,
         max: 50,
         title: "Temperatura °C",
@@ -32,7 +32,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoUmidade").innerHTML = "";
     mostradorUmidadade = new JustGage({
         id: "graficoUmidade",
-        value: valorSeguro(data.umidade),
+        value: valorSeguro(data.umidade.media),  // Acessando a média dos dados
         min: 0,
         max: 100,
         title: "Umidade %",
@@ -44,7 +44,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoPressao").innerHTML = "";
     mostradorPressao = new JustGage({
         id: "graficoPressao",
-        value: valorSeguro(data.pressao),
+        value: valorSeguro(data.pressao.media),  // Acessando a média dos dados
         min: 900,
         max: 1100,
         title: "Pressão hPa",
@@ -56,7 +56,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoLuz").innerHTML = "";
     mostradorLuz = new JustGage({
         id: "graficoLuz",
-        value: valorSeguro(data.luminosidade),
+        value: valorSeguro(data.luminosidade.media),  // Acessando a média dos dados
         min: 0,
         max: 100000,
         title: "Luminosidade lux",
@@ -68,7 +68,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoGas").innerHTML = "";
     mostradorGas = new JustGage({
         id: "graficoGas",
-        value: valorSeguro(data.co2),
+        value: valorSeguro(data.co2.media),  // Acessando a média dos dados
         min: 0,
         max: 1000,
         title: "CO2 ppm",
@@ -80,7 +80,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoAr").innerHTML = "";
     mostradorAr = new JustGage({
         id: "graficoAr",
-        value: valorSeguro(data.qualidadeAr), // corrigido
+        value: valorSeguro(data.qualidadeAr.media),  // Acessando a média dos dados
         min: 0,
         max: 500,
         title: "Qualidade do Ar AQI",
@@ -92,7 +92,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoVelocidadeDoVento").innerHTML = "";
     mostradorVelocidadeVento = new JustGage({
         id: "graficoVelocidadeDoVento",
-        value: valorSeguro(data.velocidadeVento), // corrigido
+        value: valorSeguro(data.velocidadeVento.media),  // Acessando a média dos dados
         min: 0,
         max: 100,
         title: "Velocidade Do Vento km/h",
@@ -104,7 +104,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoVoltagem").innerHTML = "";
     mostradorVoltagem = new JustGage({
         id: "graficoVoltagem",
-        value: valorSeguro(data.voltagem),
+        value: valorSeguro(data.voltagem.media),  // Acessando a média dos dados
         min: 0,
         max: 5,  // ajustado conforme backend
         title: "Voltagem V",
@@ -116,7 +116,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoRpm").innerHTML = "";
     mostradorRpm = new JustGage({
         id: "graficoRpm",
-        value: valorSeguro(data.rpm),
+        value: valorSeguro(data.rpm.media),  // Acessando a média dos dados
         min: 0,
         max: 10000,
         title: "RPM",
@@ -128,7 +128,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoPH").innerHTML = "";
     mostradorPH = new JustGage({
         id: "graficoPH",
-        value: valorSeguro(data.ph),
+        value: valorSeguro(data.ph.media),  // Acessando a média dos dados
         min: 0,
         max: 14,
         title: "PH",
@@ -140,7 +140,7 @@ export function preencherJustGageCharts(data) {
     document.querySelector("#graficoPluviometro").innerHTML = "";
     mostradorPluviometro = new JustGage({
         id: "graficoPluviometro",
-        value: valorSeguro(data.pluviometria),
+        value: valorSeguro(data.pluviometria.media),  // Acessando a média dos dados
         min: 0,
         max: 100,  // ajustei pra 100 (verifique se faz sentido)
         title: "Pluviometria mm",

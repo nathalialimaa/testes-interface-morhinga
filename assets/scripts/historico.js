@@ -1,76 +1,35 @@
-import {
-    carregarDadosAnaliseCompleta
-} from "./controller.js";
-import { construirTables } from "./tables.js";
+import { carregarDadosAnaliseCompleta } from "./controller.js";
 
-const response = await fetch("http://localhost:8080/api/analise-completa");
-const todosOsDados = await response.json();
-
-console.log("Exemplo de dado recebido:", todosOsDados[0]);
 document.querySelector("#formTemporal").addEventListener("click", async () => {
     const graficos = document.querySelector("#charts");
-    graficos.innerHTML = "";
+    graficos.innerHTML = ""; // Limpar gráficos antigos
 
-    const startDate = new Date(document.querySelector("#startDate").value);
-    const endDate = new Date(document.querySelector("#endDate").value);
+    // 1. Carregar os dados processados pelo back-end
+    const intervalos = await carregarDadosAnaliseCompleta();
 
-    // 1. Requisição ao backend
-    const response = await fetch("http://localhost:8080/api/analise-completa");
-    const todosOsDados = await response.json();
+    if (intervalos.length === 0) {
+        graficos.innerHTML = "<p>Nenhum dado disponível.</p>";
+        return;
+    }
 
-    // 2. Filtrar dados conforme intervalo de data
-    const dadosFiltrados = todosOsDados.filter(item => {
-        if (!item.data || !item.hora) return false;
+    // 2. Extrair os campos (como 'temperatura', 'pressao', etc.) do primeiro intervalo
+    const campos = Object.keys(intervalos[0].mapaDados);
 
-        const [dia, mes, ano] = item.data.split("/").map(Number);
-        const [hora, minuto, segundo] = item.hora.split(":").map(Number);
-        const dataCompleta = new Date(ano, mes - 1, dia, hora, minuto, segundo);
-
-        return dataCompleta >= startDate && dataCompleta <= endDate;
+    // 3. Transformar os dados para o formato necessário para os gráficos
+    const dadosParaGrafico = intervalos.map(intervalo => {
+        const data = new Date(intervalo.intervaloTempo); // Usa a data do intervalo
+        const valores = campos.map(campo => intervalo.mapaDados[campo]?.media || 0); // Média de cada campo
+        return [data, ...valores];
     });
 
-    // 3. Mapear dados para gráfico
-    const dados = dadosFiltrados.map(item => {
-        const [dia, mes, ano] = item.data.split("/").map(Number);
-        const [hora, minuto, segundo] = item.hora.split(":").map(Number);
-        const dataFormatada = new Date(ano, mes - 1, dia, hora, minuto, segundo);
-
-        return [
-            dataFormatada,
-            item.temperatura,
-            item.pressao,
-            item.luminosidade,
-            item.co2,
-            item.qualidadeAr,
-            item.velocidadeVento,
-            item.voltagem,
-            item.rpm,
-            item.ph,
-            item.pluviometria
-        ];
-    });
-
-    // 4. Construir gráficos
-    setTimeout(() => {
-        gerarGraficoDygraph(dados);
-    }, 0);
+    // 4. Gerar gráficos para cada campo
+    gerarGraficosDygraph(dadosParaGrafico, campos);
 });
 
-function gerarGraficoDygraph(dados) {
+function gerarGraficosDygraph(dados, campos) {
     const chart = document.querySelector("#charts");
-    const labels = [
-        "Temperatura °C",
-        "Pressão hPa",
-        "Luminosidade lux",
-        "CO2 ppm",
-        "Qualidade do Ar AQI",
-        "Velocidade do Vento km/h",
-        "Voltagem V",
-        "RPM",
-        "pH",
-        "Pluviometria mm"
-    ];
 
+    // Adiciona estilo para os gráficos
     const style = document.createElement('style');
     style.textContent = `
         .graficoDygraph {
@@ -81,21 +40,24 @@ function gerarGraficoDygraph(dados) {
     `;
     document.head.appendChild(style);
 
-    for (let i = 1; i < dados[0].length; i++) {
+    // Criar um gráfico para cada campo
+    campos.forEach((campo, index) => {
         const div = document.createElement("div");
         div.setAttribute("class", "graficoDygraph");
         chart.appendChild(div);
 
         requestAnimationFrame(() => {
-            const d = dados.map(item => [item[0], item[i]]);
+            // Seleciona apenas a coluna do campo atual
+            const d = dados.map(item => [item[0], item[index + 1]]);
+
             new Dygraph(div, d, {
                 legend: "always",
-                title: labels[i - 1],
+                title: campo.charAt(0).toUpperCase() + campo.slice(1),
+                ylabel: campo,
                 showRoller: true,
-                ylabel: labels[i - 1],
                 width: div.offsetWidth,
                 height: div.offsetHeight,
             });
         });
-    }
+    });
 }

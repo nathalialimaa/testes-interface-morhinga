@@ -22,6 +22,10 @@ function colorRangeChange(min, max, value, etapa1, etapa2) {
   return rotationStyle;
 }
 
+function valorSeguro(valor) {
+  return (valor !== null && valor !== undefined && !isNaN(valor)) ? Number(valor) : 0;
+}
+
 export function preencherGrafico(listData) {
   console.log("Chamada do preencherGrafico com campos:", Object.keys(listData));
   console.log(listData);
@@ -41,26 +45,151 @@ export function preencherGrafico(listData) {
   ];
 
   elementos.forEach(({ id, campo, min, max, etapa1, etapa2, sufixo = '', fixo = 0 }) => {
-    const valorBruto = parseFloat(listData[campo]) || 0;
+    const valorBruto = parseFloat(listData[campo]?.media) || 0; // Usando 'media' dos valores
     const valorLimitado = limitarValor(valorBruto, min, max);
     const grafico = document.getElementById(`grafico${id}`);
-    // const mostradorGauge = document.getElementById(`mostrador${id}Gauge`);
-
+    
     console.log("Valor do gráfico Normal: ", grafico);
-    // console.log("Valor do mostrador: ", mostradorGauge);
 
     if (!grafico) {
       console.warn(`Elemento com ID grafico${id} não encontrado.`);
       return;
     }
 
-    // if (!grafico || !mostradorGauge) {
-    //   console.warn(`Elemento com ID grafico${id} ou mostrador${id} não encontrado.`);
-    //   return;
-    // }
-
-    // mostradorGauge.innerHTML = `${valorLimitado.toFixed(fixo)}${sufixo}`;
     grafico.style = colorRangeChange(min, max, valorLimitado, etapa1, etapa2);
-    // grafico.append(mostradorGauge);
+  });
+}
+
+export function preencherJustGageCharts(data) {
+  //temperatura
+  document.querySelector("#graficoTemperatura").innerHTML = "";
+  new JustGage({
+    id: "graficoTemperatura",
+    value: valorSeguro(data.temperatura.media), // Acessando 'media'
+    min: 0,
+    max: 50,
+    title: "Temperatura °C",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //umidade
+  document.querySelector("#graficoUmidade").innerHTML = "";
+  new JustGage({
+    id: "graficoUmidade",
+    value: valorSeguro(data.umidade.media), // Acessando 'media'
+    min: 0,
+    max: 100,
+    title: "Umidade %",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //pressão
+  document.querySelector("#graficoPressao").innerHTML = "";
+  new JustGage({
+    id: "graficoPressao",
+    value: valorSeguro(data.pressao.media), // Acessando 'media'
+    min: 900,
+    max: 1100,
+    title: "Pressão hPa",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //luz
+  document.querySelector("#graficoLuz").innerHTML = "";
+  new JustGage({
+    id: "graficoLuz",
+    value: valorSeguro(data.luminosidade.media), // Acessando 'media'
+    min: 0,
+    max: 100000,
+    title: "Luminosidade lux",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //co2
+  document.querySelector("#graficoGas").innerHTML = "";
+  new JustGage({
+    id: "graficoGas",
+    value: valorSeguro(data.co2.media), // Acessando 'media'
+    min: 0,
+    max: 1000,
+    title: "CO2 ppm",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //qualidade do ar
+  document.querySelector("#graficoAr").innerHTML = "";
+  new JustGage({
+    id: "graficoAr",
+    value: valorSeguro(data.qualidadeAr.media), // Acessando 'media'
+    min: 0,
+    max: 500,
+    title: "Qualidade do Ar AQI",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //velocidade do vento
+  document.querySelector("#graficoVelocidadeDoVento").innerHTML = "";
+  new JustGage({
+    id: "graficoVelocidadeDoVento",
+    value: valorSeguro(data.velocidadeVento.media), // Acessando 'media'
+    min: 0,
+    max: 100,
+    title: "Velocidade Do Vento km/h",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //voltagem
+  document.querySelector("#graficoVoltagem").innerHTML = "";
+  new JustGage({
+    id: "graficoVoltagem",
+    value: valorSeguro(data.voltagem.media), // Acessando 'media'
+    min: 0,
+    max: 5,  // ajustado conforme backend
+    title: "Voltagem V",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //RPM
+  document.querySelector("#graficoRpm").innerHTML = "";
+  new JustGage({
+    id: "graficoRpm",
+    value: valorSeguro(data.rpm.media), // Acessando 'media'
+    min: 0,
+    max: 10000,
+    title: "RPM",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //pH
+  document.querySelector("#graficoPH").innerHTML = "";
+  new JustGage({
+    id: "graficoPH",
+    value: valorSeguro(data.ph.media), // Acessando 'media'
+    min: 0,
+    max: 14,
+    title: "PH",
+    refreshAnimation: true,
+    relativeGaugeSize: true
+  });
+
+  //pluviometria
+  document.querySelector("#graficoPluviometro").innerHTML = "";
+  new JustGage({
+    id: "graficoPluviometro",
+    value: valorSeguro(data.pluviometria.media), // Acessando 'media'
+    min: 0,
+    max: 100,  // ajustei pra 100 (verifique se faz sentido)
+    title: "Pluviometria mm",
+    refreshAnimation: true,
+    relativeGaugeSize: true
   });
 }
