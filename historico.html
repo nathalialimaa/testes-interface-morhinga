@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoRHinga</title>
+    <link rel="shortcut icon" href="./assets/imgs/icons8-m-96.png" type="image/png">
+
+
+    <!--Estilos-->
+    <link rel="stylesheet" href="./assets/styles/styleHistorico.css">
+    <link rel="stylesheet" href="./assets/styles/styles.css">
+
+    <!--Charts js-->
+    <script defer type="module" src="./assets/scripts/historico.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--Dygraphs-->
+    <script type="text/javascript" src="https://unpkg.com/dygraphs@2.2.1/dist/dygraph.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/dygraphs@2.2.1/dist/dygraph.min.css" />
+
+    <!--Abas-->
+    <script defer src="./assets/scripts/abas.js"></script>
+
+    <!--Tabelas-->
+    <script defer type="module" src="./assets/scripts/tables.js"></script>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand"><a href="index.html" class="logo">Morhinga</a></div>
+    </div>
+
+    <div class="formulario">
+        <h2>Pesquisar intervalo temporal</h2>
+        <div class="form">
+            <div class="inputs">
+                <div class="label">
+                    <label for="startDate">Data de início</label>
+                </div>
+                <div class="input">
+                    <input type="date" name="startDate" id="startDate">
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="label">
+                    <label for="endDate">Data de fim</label>
+                </div>
+                <div class="input">
+                    <input type="date" name="endDate" id="endDate">
+                </div>
+            </div>
+            <button id="formTemporal" class="button" >Pesquisar</button>
+        </div>
+    </div>
+    <div class="tabs-container">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tab1">Gráficos</button>
+            <button class="tab-button" data-tab="tab2">Temperatura</button>
+            <button class="tab-button" data-tab="tab3">Umidade</button>
+            <button class="tab-button" data-tab="tab4">Pressão</button>
+            <button class="tab-button" data-tab="tab5">Luminosidade</button>
+            <button class="tab-button" data-tab="tab6">CO2</button>
+            <button class="tab-button" data-tab="tab7">Qualidade do Ar</button>
+            <button class="tab-button" data-tab="tab8">Velocidade do Vento</button>
+            <button class="tab-button" data-tab="tab9">Voltagem</button>
+            <button class="tab-button" data-tab="tab10">RPM</button>
+            <button class="tab-button" data-tab="tab11">pH</button>
+            <button class="tab-button" data-tab="tab12">Pluviometro</button>
+        </div>
+
+        <div class="tab-content active" id="tab1">
+            <div id="charts"></div>
+        </div>
+        <div class="tab-content" id="tab2">
+            <div id="temperatura"></div>
+        </div>
+        <div class="tab-content" id="tab3">
+            <div id="umidade"></div>
+        </div>
+        <div class="tab-content" id="tab4">
+            <div id="pressao"></div>
+        </div>
+        <div class="tab-content" id="tab5">
+            <div id="luminosidade"></div>
+        </div>
+        <div class="tab-content" id="tab6">
+            <div id="cO2"></div>
+        </div>
+        <div class="tab-content" id="tab7">
+            <div id="qualidadeDoAr"></div>
+        </div>
+        <div class="tab-content" id="tab8">
+            <div id="velocidadeDoVento"></div>
+        </div>
+        <div class="tab-content" id="tab9">
+            <div id="voltagem"></div>
+        </div>
+        <div class="tab-content" id="tab10">
+            <div id="rpm"></div>
+        </div>
+        <div class="tab-content" id="tab11">
+            <div id="ph"></div>
+        </div>
+        <div class="tab-content" id="tab12">
+            <div id="pluviometria"></div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

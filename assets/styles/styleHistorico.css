@@ -1,0 +1,102 @@
+.formulario{
+    max-width: 70%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.label{
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.logo{
+    text-decoration: none;
+    color: #022b3a;
+}
+.form{
+    display: flex;
+    gap: 50px;
+    align-items: flex-end
+}
+#charts{
+    max-width: 100%;
+    margin:30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap:200px;
+    justify-content: center;
+}
+.graficoDygraph{
+    width: 600px !important;
+}
+.tabs-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.tab-button:hover {
+    background-color: #ddd;
+}
+
+.tab-button.active {
+    background-color: #ccc;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+table{
+    padding: 10px;
+    width: 100%;
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+th, td{
+    text-align: center;
+    min-height: 50px;
+    padding: 15px 8px; 
+}
+table tr{
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+}
+table tr:nth-child(even){
+    background-color: rgb(173, 172, 172);
+}
+table ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 20px;
+}

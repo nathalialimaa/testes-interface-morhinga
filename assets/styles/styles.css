@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #e8e7d2;
+  overflow: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: #a9e4cf;
+  box-shadow: 1px 1px 10px #022b3a9d;
+  border-bottom: 1px solid #022b3a9d;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: 'Afacad Flux', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #022b3a;
+  margin-left: 10px;
+}
+
+/* MAPA */
+.map-container {
+  display: flex;
+  height: calc(100% - 75px); 
+  align-items: center;
+  justify-content: center;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  transition: width 0.6s ease;
+}
+
+
+
+#botaoHistorico {
+  background-color: #00f; /* Azul para destaque */
+  margin: 0 !important;
+  padding: 5px 10px;
+}
+
+
+/* PAINEL DESLIZANTE */
+.painel-graficos {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70vw;
+  height: 100%;
+  background: white;
+  z-index: 999;
+  overflow-y: auto;
+  padding: 2rem;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+  transition: right 0.5s ease-in-out; 
+/*   display: grid;
+/*   flex-direction:column; */
+  /*justify-content: space-between;
+ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 1rem;
+  align-content: start; */
+}
+
+.painel-graficos.aberto {
+  right: 0;
+}
+
+/* Cabeçalho com Histórico e X lado a lado */
+.painel-header-custom {
+  position:absolute;
+  top:1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap:1rem;
+  z-index:10;
+  align-items: center;
+}
+
+.painel-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.fechar-painel {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #022b3a;
+  border: none;
+  background: none;
+  padding: 0 10px;
+}
+
+.nome-estacao {
+  display: flex;
+  position: relative;
+  top: 1rem;
+  right:51rem; /* Ajuste essa distância conforme a posição do 'X' */
+  font-size: 2rem;
+  font-style: italic;
+  color: #555;
+  z-index: 10;
+}
+
+.abrir-historico {
+  font-size: 1.5rem;
+  background-color: #f4f4f4;
+  color: #022b3a;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 2px solid #022b3a;
+  transition: background-color 0.3s ease;
+}
+
+.abrir-historico:hover {
+  background-color: #022b3a;
+  color: white;
+}
+
+/*  Container exclusivo para os gráficos (abaixo do header) */
+
+.graficos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 6rem; /* Para evitar sobreposição com o cabeçalho */
+  width: 100%;
+  box-sizing: border-box;
+  align-content: start;
+}
+
+.grafico-container {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.grafico-container svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+
+
+
+/* GRÁFICOS */
+/* .painel-graficos > div:not(.painel-header-custom) {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  margin-top: 5rem;
+  /*margin: 1rem auto;
+  max-width: 300px;
+  text-align: center;
+}
+ */
+.graficos-container > div {
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 8px;
+  height: 250px;
+}
+/* VALORES */
+.mostrador {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #022b3a;
+}
+
+/* BOTÕES */
+.button {
+  background-color: #a9e4cf;
+  color: #022b3a;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #a9e4cf;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #022b3a;
+  color: #a9e4cf;
+  border: 2px solid #022b3a;
+}
+
+/* LINK HISTÓRICO */
+#historico {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+  z-index: 10;
+}
+
+#linkHistorico {
+  display: none;
+}
+
+/* PUXADOR */
+#puxador {
+  display: none;
+  position: relative;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#puxador > img {
+  max-width: 30px;
+}
+
+
+.mostrador-custom {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  pointer-events: none;
+}
+
+#painelHeader.visivel {
+  display: flex;
+}
+
+
+
+
+
+
+

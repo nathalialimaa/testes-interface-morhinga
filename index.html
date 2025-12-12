@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoRHinga</title>
+  <link rel="shortcut icon" href="./assets/imgs/icons8-m-96.png" type="image/png" />
+  <link rel="stylesheet" href="./assets/styles/styles.css" />
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- Geocoder -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <!-- JustGage -->
+  <script defer src="./assets/scripts/JustGageLibrary/raphael-2.1.4.min.js"></script>
+  <script defer src="./assets/scripts/JustGageLibrary/justgage.js"></script>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="brand">Morhinga</div>
+  </div>
+
+  <div class="map-container">
+    <div id="map"></div>
+    <div id="puxador">
+      <img src="./assets/imgs/puxar.png" alt="voltar o mapa em full screen" />
+    </div>
+    <div id="historico">
+      <a class="button" id="linkHistorico">Histórico</a>
+    </div>
+  </div>
+
+  <!-- Painel deslizante com gráficos -->
+  <div class="painel-graficos" id="painelGraficos">
+      <div class="painel-header-custom"> 
+        <span class="nome-estacao">Estação de Parnamirim</span>
+        <a href="historico.html" target="_blank" class="abrir-historico">Histórico</a>
+        <div class="fechar-painel" id="fecharPainel">×</div>
+      </div> 
+
+      <div class="graficos-container">
+      <!-- ========== GRÁFICOS JUSTGAGE ========== -->
+        <!-- <h3>Indicadores (JustGage)</h3> -->
+        <div id="graficoTemperatura" class="grafico-container"></div>
+        <div id="graficoUmidade" class="grafico-container"></div>
+        <div id="graficoPressao" class="grafico-container"></div>
+        <div id="graficoLuz" class="grafico-container"></div>
+        <div id="graficoGas" class="grafico-container"></div>
+        <div id="graficoAr" class="grafico-container"></div>
+        <div id="graficoVelocidadeDoVento" class="grafico-container"></div>
+        <div id="graficoVoltagem" class="grafico-container"></div>
+        <div id="graficoRpm" class="grafico-container"></div>
+        <div id="graficoPH" class="grafico-container"></div>
+        <div id="graficoPluviometro" class="grafico-container"></div>
+      </div>  
+
+    <!-- ========== GRÁFICOS PONTEIRO CUSTOMIZADOS ========== -->
+    <!-- <h3>Indicadores Avançados (Custom Gauges)</h3>
+    <div id="graficoTemperaturaGauge" class="grafico-container">
+      <div id="mostradorTemperaturaGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoUmidadeGauge" class="grafico-container">
+      <div id="mostradorUmidadeGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoPressaoGauge" class="grafico-container">
+      <div id="mostradorPressaoGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoLuzGauge" class="grafico-container">
+      <div id="mostradorLuzGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoGasGauge" class="grafico-container">
+      <div id="mostradorGasGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoArGauge" class="grafico-container">
+      <div id="mostradorArGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoVelocidadeDoVentoGauge" class="grafico-container">
+      <div id="mostradorVelocidadeDoVentoGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoVoltagemGauge" class="grafico-container">
+      <div id="mostradorVoltagemGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoRpmGauge" class="grafico-container">
+      <div id="mostradorRpmGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoPHGauge" class="grafico-container">
+      <div id="mostradorPHGauge" class="mostrador-custom"></div>
+    </div>
+    <div id="graficoPluviometroGauge" class="grafico-container">
+      <div id="mostradorPluviometroGauge" class="mostrador-custom"></div>
+    </div> -->
+
+  <script>
+    alert("O servidor está sendo ativado, aguarde. Esta operação pode durar até 1 minuto.");
+  </script>
+
+  <!-- Scripts -->
+  <script defer type="module" src="./assets/scripts/maps.js"></script>
+</body>
+</html>
